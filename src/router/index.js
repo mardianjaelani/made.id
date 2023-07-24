@@ -15,10 +15,10 @@ import PageNotFound from "../views/PageNotFound.vue"
 Vue.use(VueRouter);
 
 function checkAuth(to, from, resolve, reject) {
-  if (store.getters.isAdminLoggedIn || store.state.admin.isLoggedIn) {
+  if (store.getters.isUserLoggedIn || store.state.user.isLoggedIn) {
     resolve();
   } else {
-    router.push({ path: "/staff/login" });
+    router.push({ path: "/" });
   }
 }
 
@@ -68,7 +68,7 @@ const routes = [
     path: "/staff",
     component: DashboardLayout,
     redirect: "/staff/dashboard",
-    // beforeEnter: checkAuth,
+    beforeEnter: checkAuth,
     children: [
       {
         path: 'dashboard',

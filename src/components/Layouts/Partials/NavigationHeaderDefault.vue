@@ -101,7 +101,7 @@ export default {
         logout(){
             this.loading = true
 
-            this.$store.dispatch("logoutAdmin").then(() => {
+            this.$store.dispatch("logoutUser").then(() => {
                 this.snackbar = {
                     color: "success",
                     icon: "mdi-checkbox-marked-circle",

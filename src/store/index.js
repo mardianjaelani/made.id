@@ -15,7 +15,8 @@ export default new Vuex.Store({
 		name: '',
 		detail: null,
 		salon_code: '',
-		patient_id: ''
+		patient_id: '',
+		role: ''
 	},
 	admin: {
 		token: null,
@@ -69,14 +70,11 @@ export default new Vuex.Store({
 		state.admin.salon_code = payload.data.salon_code
 	},
     USER_TOKEN (state, payload) {
+		console.log(payload);
 		state.user.token = payload.token
-		state.user.username = payload.data.value.user_id
-		state.user.isLoggedIn = true
-		state.user.auth = payload.data.value.auth
-		state.user.name = payload.data.value.name
-		state.user.detail = payload.data.value.detail
-		state.user.salon_code = payload.data.value.salon_code
-		state.user.patient_id = payload.data.value.patient_id		
+		state.user.username = payload.data.email
+		state.user.role = payload.data.role
+		state.user.isLoggedIn = true		
 	},
     USER_LOGOUT (state, payload) {
 		if(payload == true) {
@@ -145,27 +143,36 @@ export default new Vuex.Store({
 		commit('SET_BOOK_DATETIME', data)
 	},
     loginUser({ commit }, data) {
-		// return new Promise((resolve, reject) => {
-		// 	axios.post(`${process.env.VUE_APP_URL}/api/v1/password_login`, data)
-		// 	.then(res => {
-		// 		const data = {
-		// 			'data' : res.data,
-		// 			'token' : res.headers.authorization
-		// 		}
-		// 		axios.defaults.headers.common["Authorization"] = res.headers.authorization
-		// 		commit("USER_TOKEN", data);
-		// 		resolve(res)
-		// 	})
-		// 	.catch(err => {
-		// 		reject(err)
-		// 	})
-		// })
+		return new Promise((resolve, reject) => {
+			axios.post(`${process.env.VUE_APP_URL}/api/login`, data)
+			.then(res => {
+				console.log(res.data.data);
+				const data = {
+					'data' : res.data.data,
+					'token' : res.data.data.access_token
+				}
+				axios.defaults.headers.common["Authorization"] = res.data.data.access_token
+				commit("USER_TOKEN", data);
+				resolve(res)
+			})
+			.catch(err => {
+				reject(err)
+			})
+		})
 	},
     logoutUser({ commit }) {
 		return new Promise((resolve, reject) => {
-			delete axios.defaults.headers.common['Authorization']
-			commit('USER_LOGOUT', true)
-			resolve('')
+			axios.get(`${process.env.VUE_APP_URL}/api/logout`, { 
+				headers: { Authorization: `Bearer ${this.getters.isTokenUser}` } 
+			})
+			.then(res => {
+				delete axios.defaults.headers.common['Authorization']
+				commit('USER_LOGOUT', true)
+				resolve(res)
+			})
+			.catch(err => {
+				reject(err)
+			})
 		})
 	},
 	loginAdmin({ commit }, data) {

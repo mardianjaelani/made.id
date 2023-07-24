@@ -129,7 +129,7 @@
 
               this.loading = true
 
-              let user_id = this.email;
+              let email = this.email;
 			        let password = this.password;
 
               this.$store.dispatch('setOverlay', true)
@@ -151,25 +151,26 @@
                   return false
                 }
 
-              // this.$store
-              // .dispatch("loginUser", { user_id, password })
-              // .then((res) => {
+              this.$store
+              .dispatch("loginUser", { email, password })
+              .then((res) => {
                 this.$store.dispatch('setOverlay', false)
                 this.$router.push('/staff');                
-              // })
-              // .catch((err) => {
-              //   this.$store.dispatch('setOverlay', false)
-              //   this.snackbar = {
-              //     color: "error",
-              //     icon: "mdi-alert-circle",
-              //     mode: "multi-line",
-              //     position: "top",
-              //     timeout: 7500,
-              //     title: "Error",
-              //     text: err,
-              //     visible: true
-              //   };
-              // });
+              })
+              .catch((err) => {
+                console.log(err.response);
+                this.$store.dispatch('setOverlay', false)
+                this.snackbar = {
+                  color: "error",
+                  icon: "mdi-alert-circle",
+                  mode: "multi-line",
+                  position: "top",
+                  timeout: 7500,
+                  title: "Error",
+                  text: err.response.status,
+                  visible: true
+                };
+              });
             }
         }
     }
