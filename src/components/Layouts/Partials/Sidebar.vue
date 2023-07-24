@@ -21,8 +21,8 @@
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>{{this.$store.state.admin.name}}</v-list-item-title>
-            <v-list-item-subtitle>{{this.$store.state.admin.username}}</v-list-item-subtitle>
+            <v-list-item-title>{{this.$store.state.user.username}}</v-list-item-title>
+            <v-list-item-subtitle>{{this.$store.state.user.role}}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
 
