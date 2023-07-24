@@ -29,7 +29,7 @@
                                         <v-img src="/images/default-user.png" alt="Admin"/>
                                     </v-avatar>
                                     <p class="mt-3">
-                                        {{$store.state.admin.name}}
+                                        {{$store.state.user.username}}
                                     </p>
                                 </div>
                             </v-card-text>
