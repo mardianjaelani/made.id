@@ -18,7 +18,7 @@
             <v-col cols="12">
                 <v-card class="rounded-l elevation-1">
                     <v-card-title>
-                        Users
+                        Category
                         <v-spacer></v-spacer>
                         <v-btn
                         small
@@ -41,7 +41,7 @@
                         <v-data-table
                             dense
                             :headers="headers"
-                            :items="users"
+                            :items="categories"
                             class="elevation-1"
                             :items-per-page="20"
                             :loading="$store.state.overlay"
@@ -108,7 +108,7 @@
                             <v-row>
                                 <v-col cols="12">
                                     <div class="d-flex">
-                                        Users
+                                        Category
                                         <v-spacer></v-spacer>
                                         <v-btn
                                             class="mx-2"
@@ -128,21 +128,7 @@
                         <v-card-text>
                             <v-container>
                                 <v-row class="mt-2">
-                                    <v-col class="col-12" sm="6" md="6">
-                                        <h6 class="blue-lcd mb-1">Email <span class="red--text"><strong>* </strong></span></h6>
-                                        <v-text-field
-                                            solo
-                                            dense
-                                            label="Email"
-                                            persistent-hint
-                                            v-model="email"
-                                            class="ma-0 pa-0 border-12"
-                                            hide-details=true
-                                            type="email"
-                                        >
-                                        </v-text-field>
-                                    </v-col>
-                                    <v-col class="col-12" sm="6" md="6">
+                                    <v-col class="col-12" sm="12" md="12">
                                         <h6 class="blue-lcd mb-1">Name <span class="red--text"><strong>* </strong></span></h6>
                                         <v-text-field
                                             solo
@@ -155,35 +141,14 @@
                                         >
                                         </v-text-field>
                                     </v-col>
-                                    <v-col class="col-12" sm="6" md="6">
-                                        <h6 class="blue-lcd mb-1">Password <span class="red--text"><strong>* </strong></span></h6>
-                                        <v-text-field
+                                    <v-col class="col-12" sm="12" md="12">
+                                        <h6 class="blue-lcd mb-1">Description <span class="red--text"><strong>* </strong></span></h6>
+                                        <v-textarea
                                             solo
-                                            dense
-                                            label="Password"
-                                            persistent-hint
-                                            v-model="password"
+                                            name="description"
                                             class="ma-0 pa-0 border-12"
-                                            hide-details=true
-                                            :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-                                            :type="show ? 'text' : 'password'"
-                                            @click:append="show = !show"
-                                        >
-                                        </v-text-field>
-                                    </v-col>
-                                    <v-col class="col-12" sm="6" md="6">
-                                        <h6 class="blue-lcd mb-1">Role <span class="red--text"><strong>* </strong></span></h6>
-                                        <v-autocomplete
-                                            dense
-                                            solo
-                                            clearable
-                                            v-model="role"
-                                            :items="roles"
-                                            item-value="value"
-                                            :item-text="item => item.text"
-                                            class="ma-0 pa-0 border-12"
-                                            hide-details=true
-                                        ></v-autocomplete> 
+                                            v-model="description"
+                                        ></v-textarea>
                                     </v-col>
                                 </v-row>
                             </v-container>
@@ -210,7 +175,7 @@
                         <v-card-title class="text-center">
                             <v-row>
                                 <v-col cols="12">
-                                    Edit Users
+                                    Edit Category
                                 </v-col>
                                 <v-divider></v-divider>
                             </v-row>
@@ -218,22 +183,7 @@
                         <v-card-text>
                             <v-container>
                                 <v-row class="mt-2">
-                                    <v-col class="col-12" sm="6" md="6">
-                                        <h6 class="blue-lcd mb-1">Email <span class="red--text"><strong>* </strong></span></h6>
-                                        <v-text-field
-                                            solo
-                                            dense
-                                            label="Email"
-                                            persistent-hint
-                                            v-model="email"
-                                            class="ma-0 pa-0 border-12"
-                                            hide-details=true
-                                            type="email"
-                                            disabled
-                                        >
-                                        </v-text-field>
-                                    </v-col>
-                                    <v-col class="col-12" sm="6" md="6">
+                                    <v-col class="col-12" sm="12" md="12">
                                         <h6 class="blue-lcd mb-1">Name <span class="red--text"><strong>* </strong></span></h6>
                                         <v-text-field
                                             solo
@@ -246,35 +196,14 @@
                                         >
                                         </v-text-field>
                                     </v-col>
-                                    <v-col class="col-12" sm="6" md="6">
-                                        <h6 class="blue-lcd mb-1">Password <span class="red--text"><strong>* </strong></span></h6>
-                                        <v-text-field
+                                    <v-col class="col-12" sm="12" md="12">
+                                        <h6 class="blue-lcd mb-1">Description <span class="red--text"><strong>* </strong></span></h6>
+                                        <v-textarea
                                             solo
-                                            dense
-                                            label="Password"
-                                            persistent-hint
-                                            v-model="password"
+                                            name="description"
                                             class="ma-0 pa-0 border-12"
-                                            hide-details=true
-                                            :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-                                            :type="show ? 'text' : 'password'"
-                                            @click:append="show = !show"
-                                        >
-                                        </v-text-field>
-                                    </v-col>
-                                    <v-col class="col-12" sm="6" md="6">
-                                        <h6 class="blue-lcd mb-1">Role <span class="red--text"><strong>* </strong></span></h6>
-                                        <v-autocomplete
-                                            dense
-                                            solo
-                                            clearable
-                                            v-model="role"
-                                            :items="roles"
-                                            item-value="value"
-                                            :item-text="item => item.text"
-                                            class="ma-0 pa-0 border-12"
-                                            hide-details=true
-                                        ></v-autocomplete> 
+                                            v-model="description"
+                                        ></v-textarea>
                                     </v-col>
                                 </v-row>
                             </v-container>
@@ -297,7 +226,7 @@
     </v-container>
 </template>
 <script>
-import {user} from "@/backend-api/user"
+import {category} from "@/backend-api/category"
 
 export default {
     data() {
@@ -324,24 +253,23 @@ export default {
                     href: '/staff',
                 },
                 {
-                    text: 'Users',
+                    text: 'Category',
                     disabled: true,
                 }
             ],
             headers:[
                 {
-                    text: 'Email',
+                    text: 'Name',
                     align: 'start',
-                    value: 'email', 
+                    value: 'name',
                     align:'left'},
-                { text: 'Name', value: 'name' , align:'left'},
-                { text: 'Role', value: 'role' , align:'left', width:'200'},
+                { text: 'Slug', value: 'slug' , align:'left', width:'400'},
                 { text: 'Action', value: 'action' , align:'left', width:'20'},
             ],
-            users: [],
+            categories: [],
             search: '',
             dialog: false,
-            email: '',
+            description: '',
             name: '',
             statuses: [
                 {
@@ -383,32 +311,28 @@ export default {
             return rowClass;
         },
         clear(){
-            this.email = ''
-            this.password = ''
-            this.role = ''
+            this.description = ''
             this.name = ''
         },
         detailItem(item){
             this.detail = item
             this.dialog = true
             this.showDetail = true
-            this.email = item.email
+            this.description = item.description
             this.name = item.name
-            this.role = item.role
         },
         detailItemEdit(item){
             this.detail = item
             this.dialogEdit = true
-            this.email = item.email
+            this.description = item.description
             this.name = item.name
-            this.role = item.role
         },
         async getPullData(){
-            this.users = []
+            this.categories = []
             this.$store.dispatch('setOverlay', true)
-            var respData = await user.fetchUser('', null, false, false, false)
+            var respData = await category.fetchCategory('', null, false, false, false)
             if (respData.status === 200) {
-                this.users = respData.data.data
+                this.categories = respData.data.data
 
                 this.$store.dispatch('setOverlay', false)
 
@@ -420,7 +344,7 @@ export default {
             this.$store.dispatch('setOverlay', true)
             this.dialog = false
 
-            if (this.email === '' || this.name === '' || this.password === '' || this.role === '') {
+            if (this.description === '' || this.name === '') {
                 this.snackbar = {
                     color: "error",
                     icon: "mdi-alert-circle",
@@ -438,13 +362,11 @@ export default {
             }
 
             var reqBody = {
-                'email': this.email,
                 'name': this.name,
-                'password': this.password,
-                'role': this.role
+                'description': this.description
             }
 
-            const respData = await user.storeUser('', reqBody, false, false, false)
+            const respData = await category.storeCategory('', reqBody, false, false, false)
 
             if (respData.status === 200) {
 
@@ -484,7 +406,7 @@ export default {
             this.$store.dispatch('setOverlay', true)
             this.dialogEdit = false
 
-            if (this.email === '' || this.name === '' || this.password === '' || this.role === '' ) {
+            if (this.description === '' || this.name === '') {
                 this.snackbar = {
                     color: "error",
                     icon: "mdi-alert-circle",
@@ -502,14 +424,12 @@ export default {
             }
 
             var reqBody = {
-                'email': this.detail.email,
                 'name': this.name,
-                'role': this.role,
-                'password': this.password,
-                'user_id': this.detail.id
+                'description': this.description,
+                'category_id': this.detail.id
             }
 
-            const respData = await user.updateUser('', reqBody, false, false, false)
+            const respData = await category.updateCategory('', reqBody, false, false, false)
 
             if (respData.status === 200) {
 

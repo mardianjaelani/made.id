@@ -84,6 +84,11 @@ const routes = [
         name: "user",
         component: () => import("../views/Staff/User.vue"),
       },
+      {
+        path: "category",
+        name: "category",
+        component: () => import("../views/Staff/Category.vue"),
+      },
     ]
   },
 
