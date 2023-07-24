@@ -67,7 +67,7 @@
               <v-card class="rounded-l blue lighten-5" outlined>
                 <v-card-title class="">
                   <div class="d-flex">
-                    <v-icon color="primary">
+                    <v-icon color="blue">
                       mdi-bucket
                     </v-icon>
                     <div class="ml-3">
