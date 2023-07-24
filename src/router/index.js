@@ -55,8 +55,7 @@ const routes = [
   {
     path: "/staff/login",
     name: "LoginAdmin",
-    component: () =>
-          import("../views/auth/LoginAdmin.vue"),
+    component: () => import("../views/auth/LoginAdmin.vue"),
   },
   {
     path: "/about",
@@ -79,6 +78,11 @@ const routes = [
         path: 'profile',
         name: 'Profile',
         component: Profile
+      },
+      {
+        path: "user",
+        name: "user",
+        component: () => import("../views/Staff/User.vue"),
       },
     ]
   },

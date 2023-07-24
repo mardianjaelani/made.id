@@ -137,9 +137,9 @@ export default {
                 ] },
             ],
             settings:[
-                { title: 'Setting', icon: 'mdi-cog-outline', path: '/staff/setting', active: false,
+                { title: 'Setting', icon: 'mdi-cog-outline', path: '/staff/user', active: false,
                 submenus: [
-                    { title: 'Account', icon: 'mdi-account-arrow-up-outline', path: '/staff/setting', active: false },
+                    { title: 'Account', icon: 'mdi-account-arrow-up-outline', path: '/staff/user', active: false },
                 ] },
             ]
         }
