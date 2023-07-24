@@ -4,7 +4,7 @@
       class="text-center"
       cols="12"
     >
-      {{ new Date().getFullYear() }} — <strong>自由が丘クリニック</strong>
+      {{ new Date().getFullYear() }} — <strong>Made.id</strong>
     </v-col>
   </v-footer>
 </template>

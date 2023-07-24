@@ -2,7 +2,7 @@
     <v-app-bar app color="white darken-3" dark>
         <v-app-bar-nav-icon color="#000" @click.stop="drawer()" />
         <v-toolbar-title color="#000" style="width: 300px;">
-            <span class="hidden-sm-and-down">ホーム</span>
+            <span class="hidden-sm-and-down"></span>
         </v-toolbar-title>
         <v-spacer />
         <v-menu offset-y>
@@ -40,11 +40,11 @@
                             <v-icon>mdi-lock</v-icon>
                         </v-list-item-icon>
                         <v-list-item-content>
-                            <v-list-item-title>パスワード更新</v-list-item-title>
+                            <v-list-item-title>Profile</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
                     <v-list-item>
-                        <v-btn type="submit" block class="border-12 mr-12 pl-12 pr-12 pt-2 pb-2 mt-3" color="secondary" @click="logout()">ログアウト</v-btn>
+                        <v-btn type="submit" block class="border-12 mr-12 pl-12 pr-12 pt-2 pb-2 mt-3" color="secondary" @click="logout()">Logout</v-btn>
                     </v-list-item>
                 </v-list-item-group>
             </v-list>
@@ -113,7 +113,7 @@ export default {
                     visible: true
                 };
                 this.loading = false
-                this.$router.push('/staff/login')
+                this.$router.push('/')
             });
         }
     },

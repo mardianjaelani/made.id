@@ -145,21 +145,21 @@ export default new Vuex.Store({
 		commit('SET_BOOK_DATETIME', data)
 	},
     loginUser({ commit }, data) {
-		return new Promise((resolve, reject) => {
-			axios.post(`${process.env.VUE_APP_URL}/api/v1/password_login`, data)
-			.then(res => {
-				const data = {
-					'data' : res.data,
-					'token' : res.headers.authorization
-				}
-				axios.defaults.headers.common["Authorization"] = res.headers.authorization
-				commit("USER_TOKEN", data);
-				resolve(res)
-			})
-			.catch(err => {
-				reject(err)
-			})
-		})
+		// return new Promise((resolve, reject) => {
+		// 	axios.post(`${process.env.VUE_APP_URL}/api/v1/password_login`, data)
+		// 	.then(res => {
+		// 		const data = {
+		// 			'data' : res.data,
+		// 			'token' : res.headers.authorization
+		// 		}
+		// 		axios.defaults.headers.common["Authorization"] = res.headers.authorization
+		// 		commit("USER_TOKEN", data);
+		// 		resolve(res)
+		// 	})
+		// 	.catch(err => {
+		// 		reject(err)
+		// 	})
+		// })
 	},
     logoutUser({ commit }) {
 		return new Promise((resolve, reject) => {

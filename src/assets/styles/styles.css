@@ -21,13 +21,13 @@ a{
 }
 
 .outer{
-  /* background-image: url("../background.png"); */
+  background-image: url("../inspiration-geometry.png") !important;
   background-color: #e9ecef;
   height: 100%;
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
 }
 
 .btn-primary 
@@ -390,4 +390,12 @@ circle:nth-of-type(4) { fill: #2b2b2b; }
 
 .blue-lcd{
   color: #e83e8c;
+}
+
+label {
+  font-size: 12px;
+  margin-bottom: 5px;
+  text-transform: capitalize !important;
+  text-align: left;
+  float: left;
 }

@@ -11,8 +11,8 @@
                   <v-img
                     class="ml-2"
                     max-width="150"
-                    lazy-src="../../assets/logo.png"
-                    src="../../assets/logo.png"
+                    lazy-src="../../assets/logo_made.png"
+                    src="../../assets/logo_made.png"
                     style="border-radius: 50%;"
                   ></v-img>
                   <span class="ml-2 brand-text font-weight-bold h5" data-v-5c6101e4="">オンライン診療</span>

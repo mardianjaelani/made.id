@@ -4,13 +4,12 @@
             <v-list-item-icon class="mt-2 mr-3 mb-0">
                 <v-img
                 max-width="30"
-                lazy-src="../../../assets/logo.png"
-                src="../../../assets/logo.png"
-                style="border-radius: 50%;"
+                lazy-src="../../../assets/logo_made.png"
+                src="../../../assets/logo_made.png"
                 ></v-img>
             </v-list-item-icon>
             <v-list-item-content>
-                <v-list-item-title>オンライン診療</v-list-item-title>
+                <v-list-item-title>Made.id</v-list-item-title>
             </v-list-item-content>
         </v-list-item>
 
@@ -29,7 +28,7 @@
 
         <v-divider></v-divider>
 
-        <v-list shaped>
+        <v-list shaped dense>
             <v-list-item
                 v-for="item in items"
                 :key="item.title"
@@ -46,7 +45,7 @@
             </v-list-item-content>
             </v-list-item>
         </v-list>
-        <v-list shaped class="pt-0">
+        <v-list shaped dense class="pt-0">
             <v-list-group
                 v-for="item in sidebars"
                 :key="item.title"
@@ -78,24 +77,7 @@
                 </v-list-item>
             </v-list-group>
         </v-list>
-        <v-list shaped class="pt-0">
-            <v-list-item
-                v-for="item in itemes"
-                :key="item.title"
-                :to="item.path"
-                no-action
-                color="secondary"
-            >
-            <v-list-item-icon>
-                <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-icon>
-
-            <v-list-item-content>
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-            </v-list-item>
-        </v-list>
-        <v-list shaped class="pt-0">
+        <v-list shaped dense class="pt-0 mt-0">
             <v-list-group
                 v-for="item in settings"
                 :key="item.title"
@@ -136,46 +118,34 @@ export default {
         return {
             menus: [],
             items: [
-                { title: 'ホーム', icon: 'mdi-home', path: '/staff/dashboard' },
-                { title: '予約', icon: 'mdi-calendar-check', path: '/staff/reservation' },
-                { title: '来院者', icon: 'mdi-account-box', path: '/staff/visitor' }
+                { title: 'Dashboard', icon: 'mdi-home', path: '/staff/dashboard' },
+                // { title: '予約', icon: 'mdi-calendar-check', path: '/staff/reservation' },
+                // { title: '来院者', icon: 'mdi-account-box', path: '/staff/visitor' }
             ],
             sidebars:[
-                { title: '決済管理', icon: 'mdi-format-line-weight', path: '/staff/payment-manage', active: false,
+                { title: 'Transaksi', icon: 'mdi-format-line-weight', path: '/staff/payment-manage', active: false,
                 submenus: [
-                    { title: '決済情報検索', icon: 'mdi-credit-card-outline', path: '/staff/payment-manage/search-info', active: false },
-                    { title: '日計表アップロード', icon: 'mdi-cash-sync', path: '/staff/payment-manage/upload-info', active: false }
+                    { title: 'Penjualan', icon: 'mdi-credit-card-outline', path: '/staff/payment-manage/search-info', active: false },
+                    { title: 'Pembelian', icon: 'mdi-cash-sync', path: '/staff/payment-manage/upload-info', active: false }
                 ] },
-                { title: 'マスター', icon: 'mdi-application', path: '/staff/master', active: false,
+                { title: 'Master', icon: 'mdi-application', path: '/staff/master', active: false,
                 submenus: [
-                    { title: '施術', icon: 'mdi-doctor', path: '/staff/master/treatment', active: false },
-                    { title: '薬剤', icon: 'mdi-pill', path: '/staff/master/medicine', active: false },
-                    { title: '物品', icon: 'mdi-needle', path: '/staff/master/item', active: false },
-                    { title: 'サロン', icon: 'mdi-bottle-tonic-plus-outline', path: '/staff/master/salon', active: false }
+                    { title: 'Produk', icon: 'mdi-apple', path: '/staff/master/salon', active: false },
+                    // { title: 'Harga Jual', icon: 'mdi-currency-usd', path: '/staff/master/treatment', active: false },
+                    // { title: '薬剤', icon: 'mdi-pill', path: '/staff/master/medicine', active: false },
+                    // { title: '物品', icon: 'mdi-needle', path: '/staff/master/item', active: false },
                 ] },
-            ],
-            itemes: [
-                { title: '売上管理', icon: 'mdi-account-wrench-outline', path: '/staff/sales' },
-                // { title: '設定', icon: 'mdi-cog-outline', path: '/staff/setting' },
             ],
             settings:[
-                { title: '設定', icon: 'mdi-cog-outline', path: '/staff/setting', active: false,
+                { title: 'Setting', icon: 'mdi-cog-outline', path: '/staff/setting', active: false,
                 submenus: [
-                    { title: '来院者アップロード', icon: 'mdi-account-arrow-up-outline', path: '/staff/setting', active: false },
-                    // { title: 'Video Stream', icon: 'mdi-video', path: '/staff/visitor/video-stream', active: false },
+                    { title: 'Account', icon: 'mdi-account-arrow-up-outline', path: '/staff/setting', active: false },
                 ] },
             ]
         }
     },
     mounted(){
         this.items.forEach(element => {
-            let check = element.path
-            if (check === window.location.pathname) {
-                Object.assign(element, {active: true})
-            }
-        })
-
-        this.itemes.forEach(element => {
             let check = element.path
             if (check === window.location.pathname) {
                 Object.assign(element, {active: true})
