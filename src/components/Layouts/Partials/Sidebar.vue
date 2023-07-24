@@ -131,9 +131,7 @@ export default {
                 { title: 'Master', icon: 'mdi-application', path: '/staff/master', active: false,
                 submenus: [
                     { title: 'Category', icon: 'mdi-pill', path: '/staff/category', active: false },
-                    { title: 'Produk', icon: 'mdi-apple', path: '/staff/master/salon', active: false },
-                    // { title: 'Harga Jual', icon: 'mdi-currency-usd', path: '/staff/master/treatment', active: false },
-                    // { title: '物品', icon: 'mdi-needle', path: '/staff/master/item', active: false },
+                    { title: 'Produk', icon: 'mdi-apple', path: '/staff/product', active: false }
                 ] },
             ],
             settings:[

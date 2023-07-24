@@ -89,6 +89,34 @@ const routes = [
         name: "category",
         component: () => import("../views/Staff/Category.vue"),
       },
+      {
+        path: "product",
+        component: DefaultLayout,
+        children: [
+          {
+            path: '',
+            name: 'product',
+            component: () =>
+            import("../views/Staff/product/Index.vue"),
+          },
+          {
+            path: 'create',
+            name: 'product',
+            component: () =>
+            import("../views/Staff/product/Create.vue"),
+          },
+          // {
+          //   path: 'create',
+          //   name: 'CreateVisitor',
+          //   component: () => import("../views/visitor/Create.vue"),
+          // },
+          // {
+          //   path: 'video-stream',
+          //   name: 'VideoStream',
+          //   component: () => import("../views/staff/VideoChannel.vue"),
+          // }        
+        ]
+      },
     ]
   },
 
