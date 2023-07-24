@@ -11,6 +11,14 @@
               md="12"
             >
                 <div class="d-flex mt-2">
+                    <v-btn
+                    small
+                    color="success"
+                    class="py-5"
+                    >
+                      <v-icon>mdi-plus</v-icon>
+                        Tambah Penjualan
+                    </v-btn>
                     <v-spacer></v-spacer>
                     <v-btn
                     small
