@@ -11,7 +11,7 @@
                     <v-avatar size="45px" item class="mr-1">
                         <v-img src="/images/default-user.png" alt="Admin"/>
                     </v-avatar>
-                    {{$store.state.admin.name}}
+                    {{$store.state.user.username}}
                     <v-icon>
                         mdi-chevron-down
                     </v-icon>
