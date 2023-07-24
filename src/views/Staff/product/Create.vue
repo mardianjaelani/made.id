@@ -90,7 +90,7 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                                     </button>
                                 </div>
-                                <div class="col-md-1">
+                                <div class="col-md-2">
                                     <div style="padding: 40px; text-align:center; border: dashed 2px #dddddd; cursor: pointer; width:100%" @click="openModal()">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-image"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
                                     </div>
@@ -199,6 +199,11 @@ export default {
         clear(){
             this.description = ''
             this.name = ''
+            this.category_id = ''
+            this.quantity = ''
+            this.price = ''
+            this.images = []
+            this.raw_images = ''
         },
         async getCategory(){
             var respData = await category.fetchCategory('', null, false, false, false)
