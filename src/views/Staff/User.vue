@@ -45,7 +45,7 @@
                             class="elevation-1"
                             :items-per-page="20"
                             :loading="$store.state.overlay"
-                            height="600"
+                            height="510"
                             :divider="true"
                             :light="true"
                             :item-class="tr_datatable"
