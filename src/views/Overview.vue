@@ -20,6 +20,37 @@
                         Tambah Penjualan
                     </v-btn>
                     <v-spacer></v-spacer>
+                    <v-menu
+                        ref="menu"
+                        v-model="menu"
+                        :close-on-content-click="false"
+                        transition="scale-transition"
+                        offset-y
+                        max-width="280px"
+                        min-width="auto"
+                        >
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-text-field
+                            solo
+                            dense
+                            v-model="date"
+                            label="Period"
+                            persistent-hint
+                            append-icon="mdi-calendar"
+                            v-bind="attrs"
+                            v-on="on"
+                            class="ml-3 mr-3"
+                            hide-details=true
+                            style="max-width: 220px;"
+                            ></v-text-field>
+                        </template>
+                        <v-date-picker
+                            v-model="date"
+                            type="month"
+                            no-title
+                            @input="menu = false"
+                        ></v-date-picker>
+                    </v-menu>
                     <v-btn
                     small
                     color="#fff"
@@ -28,50 +59,6 @@
                     >
                         <v-icon>mdi-cached</v-icon>
                     </v-btn>
-                    <v-btn
-                    small
-                    color="#fff"
-                    class="py-5"
-                    @click="dialogfilter = true"
-                    >
-                        <v-icon>mdi-filter-variant</v-icon>
-                    </v-btn>
-                    <v-menu
-                        ref="menu"
-                        v-model="menu"
-                        :close-on-content-click="false"
-                        transition="scale-transition"
-                        offset-y
-                        max-width="250px"
-                        min-width="auto"
-                        class="pb-2"
-                    >
-                        <template v-slot:activator="{ on, attrs }">
-                            <v-text-field
-                                dense
-                                v-model="year"
-                                label="Year"
-                                append-icon="event"
-                                v-bind="attrs"
-                                v-on="on"
-                                solo
-                                class="ma-0 pa-0"
-                                readonly
-                                hide-details=true
-                                style="padding: 1px 12px !important; max-width: 250px;"
-                                height="40px"
-                                >
-                            </v-text-field>
-                        </template>
-                        <v-date-picker
-                            ref="picker"
-                            v-model="date"
-                            :max="picker"
-                            @input="save"
-                            reactive
-                            no-title>
-                        </v-date-picker>
-                    </v-menu>
                 </div>
             </v-col>
           </v-row>
@@ -197,7 +184,7 @@ export default {
       other_balance: 0,
       menu: false,
       year: new Date().toISOString().substr(0, 4),
-      date: '',
+      date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 7),
       picker: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
       dialogfilter: false,
       entities: [],
