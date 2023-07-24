@@ -15,7 +15,7 @@
 
         <v-divider style="margin: 8px 0;"></v-divider>
 
-        <v-list-item two-line style="padding: 0 8px;">
+        <v-list-item dense two-line style="padding: 0 8px;">
           <v-list-item-avatar>
             <img src="../../../assets/default-user.png">
           </v-list-item-avatar>
@@ -26,7 +26,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-divider></v-divider>
+        <v-divider class="mt-0 pt-0 pb-0 mb-0"></v-divider>
 
         <v-list shaped dense>
             <v-list-item
