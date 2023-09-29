@@ -314,8 +314,8 @@ export default {
                     }
                 )
             } else {
-                // var quantity = parseInt(this.carts[arrayIndex].quantity) + 1
-                // this.carts[arrayIndex].quantity = quantity
+                var quantity = parseInt(this.carts[arrayIndex].qty) + 1
+                this.carts[arrayIndex].qty = quantity
             }
         },
         deleteDetail(item, i){
