@@ -90,6 +90,11 @@ const routes = [
         component: () => import("../views/Staff/Category.vue"),
       },
       {
+        path: "checkout",
+        name: "checkout",
+        component: () => import("../views/Staff/Checkout.vue"),
+      },
+      {
         path: "product",
         component: DefaultLayout,
         children: [
@@ -116,17 +121,7 @@ const routes = [
             name: 'product',
             component: () =>
             import("../views/Staff/product/Show.vue"),
-          },
-          // {
-          //   path: 'create',
-          //   name: 'CreateVisitor',
-          //   component: () => import("../views/visitor/Create.vue"),
-          // },
-          // {
-          //   path: 'video-stream',
-          //   name: 'VideoStream',
-          //   component: () => import("../views/staff/VideoChannel.vue"),
-          // }        
+          },       
         ]
       },
     ]

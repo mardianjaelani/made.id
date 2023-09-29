@@ -125,7 +125,7 @@ export default {
             sidebars:[
                 { title: 'Transaksi', icon: 'mdi-format-line-weight', path: '/staff/payment-manage', active: false,
                 submenus: [
-                    { title: 'Penjualan', icon: 'mdi-credit-card-outline', path: '/staff/payment-manage/search-info', active: false },
+                    { title: 'Penjualan', icon: 'mdi-credit-card-outline', path: '/staff/checkout', active: false },
                     { title: 'Pembelian', icon: 'mdi-cash-sync', path: '/staff/payment-manage/upload-info', active: false }
                 ] },
                 { title: 'Master', icon: 'mdi-application', path: '/staff/master', active: false,

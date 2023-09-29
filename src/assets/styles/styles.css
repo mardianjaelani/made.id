@@ -403,3 +403,38 @@ label {
 .w-30{
   width: 30% !important;
 }
+
+.v-tabs--icons-and-text > .v-tabs-bar {
+  height: 52px !important;
+}
+
+.w-100{
+  width: 100% !important;
+}
+.w-15{
+  width: 15% !important;
+}
+.w-45{
+  width: 45% !important;
+}
+.w-30{
+  width: 30% !important;
+}
+.w-10{
+  width: 10% !important;
+}
+.w-25{
+  width: 25% !important;
+}
+.w-40{
+  width: 40% !important;
+}
+.w-55{
+  width: 55% !important;
+}
+.w-2{
+  width: 2% !important;
+}
+.w-50{
+  width: 50% !important;
+}
