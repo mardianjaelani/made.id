@@ -145,18 +145,18 @@
                                                                     </div>
                                                                     <div class="w-20 text-center">
                                                                         <div class="input-group spinner number">
-                                                                            <button class="btn error v-btn p-1" type="button">
+                                                                            <button class="btn error v-btn p-1" type="button" @click="minQty(item, i)">
                                                                                 <v-icon small color="white">mdi-minus</v-icon>
                                                                             </button>
-                                                                            <input class="form-control" type="text" name="quantity" min="1" :max="item.quantity" v-model="item.qty" style="text-align:center; font-size: 12px;">
-                                                                            <button class="btn success v-btn p-1" type="button">
+                                                                            <input class="form-control" type="text" name="quantity" min="1" :max="item.quantity" v-model="item.qty" style="text-align:center; font-size: 12px;" @change="UpdateQty(item, i)">
+                                                                            <button class="btn success v-btn p-1" type="button" @click="addQty(item, i)">
                                                                                 <v-icon small color="white">mdi-plus</v-icon>
                                                                             </button>
                                                                         </div>
                                                                     </div>
                                                                     <div class="w-25 text-right">
                                                                         <p class="mt-1 text-right">
-                                                                        {{ item.price_string }}
+                                                                        {{ $store.getters.convertToCurrencyUs(item.subtotal) }}
                                                                         </p>
                                                                     </div>
                                                                     <div class="w-10 text-right">
@@ -181,15 +181,15 @@
                                                         <h6>Subtotal</h6>
                                                     </div>
                                                     <div class="w-50 text-right">
-                                                        <h6 class="primary--text">Rp. 1.000.000</h6>
+                                                        <h6 class="primary--text">Rp. {{$store.getters.convertToCurrencyUs(total)}}</h6>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex w-100">
                                                     <div class="w-50">
-                                                        <h6>Tax</h6>
+                                                        <h6>Discount</h6>
                                                     </div>
                                                     <div class="w-50 text-right">
-                                                        <h6 class="primary--text">Rp. 100.000</h6>
+                                                        <h6 class="primary--text">Rp. {{ discount }}</h6>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex w-100 mt-2">
@@ -197,7 +197,7 @@
                                                         <h5 class="primary--text">Total</h5>
                                                     </div>
                                                     <div class="w-50 text-right">
-                                                        <strong><h5 class="primary--text" style="font-weight: 700;">Rp. 1.100.000</h5></strong> 
+                                                        <strong><h5 class="primary--text" style="font-weight: 700;">Rp. {{$store.getters.convertToCurrencyUs(total + discount)}}</h5></strong> 
                                                     </div>
                                                 </div>
                                             </v-col>
@@ -236,6 +236,7 @@ export default {
             },
             timeout: 7500,
             search: '',
+            discount: 0,
             text_dialog:'',
             dialog: false,
             breadcumbs: [
@@ -260,6 +261,16 @@ export default {
     async mounted(){
         await this.getPullData()
         await this.getProduct()
+    },
+    computed:{
+        total(){
+            var total = 0
+            for (let index = 0; index < this.carts.length; index++) {
+                total = total + parseFloat(this.carts[index].subtotal);
+            }
+            
+            return (total | 0)
+        },
     },
     methods: {
         async getPullData(){
@@ -293,6 +304,29 @@ export default {
                 this.$store.dispatch('setOverlay', false)
             }
         },
+        addQty(item, i){
+            var qty = parseInt(item.qty) + 1
+            if (qty <= parseInt(item.quantity)) {
+                item.qty = qty
+                item.subtotal = qty * parseFloat(item.price)
+            }
+        },
+        minQty(item, i){
+            var qty = parseInt(item.qty) - 1
+            if (qty > 0) {
+                item.qty = qty
+                item.subtotal = qty * parseFloat(item.price)
+            }
+        },
+        UpdateQty(item, i){
+            if (parseInt(item.qty) <= parseInt(item.quantity) && parseInt(item.qty) > 0) {
+                item.qty = item.qty
+                item.subtotal = item.qty * parseFloat(item.price)
+            } else {
+                item.qty = item.quantity
+                item.subtotal = item.qty * parseFloat(item.price)
+            }
+        },
         addCart(product){
             console.log(product);
             const arrayIndex = this.carts.findIndex(x => x.product_id === product.product_id);
@@ -310,12 +344,13 @@ export default {
                         quantity: product.quantity,
                         slug: product.slug,
                         thumbnail: product.thumbnail,
-                        qty: 1
+                        qty: 1,
+                        subtotal: parseFloat(product.price) * parseInt(1)
                     }
                 )
             } else {
-                var quantity = parseInt(this.carts[arrayIndex].qty) + 1
-                this.carts[arrayIndex].qty = quantity
+                // var quantity = parseInt(this.carts[arrayIndex].qty) + 1
+                // this.carts[arrayIndex].qty = quantity
             }
         },
         deleteDetail(item, i){
