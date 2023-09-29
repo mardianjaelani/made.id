@@ -53,10 +53,16 @@
                         >                   
                             <template v-slot:top>
                                 <v-toolbar flat color="white">
-                                    <div class="d-flex w-25 mb-2">
-                                        <v-text-field solo v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details class="rounded-l"></v-text-field>
+                                    <div class="d-flex mb-2 w-30">
+                                        <v-text-field solo v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details class="rounded-l "></v-text-field>
                                     </div>
                                 </v-toolbar>
+                            </template>
+                            <template v-slot:[`item.quantity`]="{ item }">
+                                {{ $store.getters.convertToCurrencyUs(item.quantity) }}
+                            </template>
+                            <template v-slot:[`item.price`]="{ item }">
+                                {{ $store.getters.convertToCurrencyUs(item.price) }}
                             </template>
                             <template v-slot:[`item.action`]="{ item }">
                                 <v-menu
@@ -76,7 +82,7 @@
                                     </template>
 
                                     <v-list dense>
-                                        <v-list-item @click="detailItem(item)">
+                                        <v-list-item @click="detailItem(item)" :to="'/staff/product/show/'+item.slug">
                                             <v-list-item-icon>
                                                 <v-icon>mdi-magnify</v-icon>
                                             </v-list-item-icon>
@@ -84,7 +90,7 @@
                                                 <v-list-item-title>Detail</v-list-item-title>
                                             </v-list-item-content>
                                         </v-list-item>
-                                        <v-list-item @click="detailItemEdit(item)">
+                                        <v-list-item @click="detailItemEdit(item)" :to="'/staff/product/edit/'+item.slug">
                                             <v-list-item-icon>
                                                 <v-icon>mdi-pencil</v-icon>
                                             </v-list-item-icon>
@@ -139,11 +145,12 @@ export default {
                     text: 'Name',
                     align: 'start',
                     value: 'name',
-                    align:'left'},
-                { text: 'Slug', value: 'slug' , align:'left', width:'400'},
-                { text: 'Category', value: 'category' , align:'left'},
+                    align:'left', width:'200'},
+                { text: 'Slug', value: 'slug' , align:'left', width:'150'},
+                { text: 'Category', value: 'category' , align:'left', width:'120'},
                 { text: 'Stock', value: 'quantity' , align:'right', width:'100'},
-                { text: 'Price', value: 'price' , align:'right', width:'300'},
+                { text: 'Price', value: 'price' , align:'right', width:'120'},
+                { text: 'Description', value: 'description' , align:'left', width:'400'},
                 { text: 'Action', value: 'action' , align:'left', width:'50'},
             ],
             products: [],

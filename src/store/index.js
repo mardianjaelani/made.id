@@ -35,7 +35,7 @@ export default new Vuex.Store({
     error: false,
 	text: '',
 	drawer: true,
-	mini: false,
+	mini: true,
 	hover:false,
 	dialog: false,
 	dialog2: false,

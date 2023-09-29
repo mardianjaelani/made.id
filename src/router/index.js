@@ -105,6 +105,18 @@ const routes = [
             component: () =>
             import("../views/Staff/product/Create.vue"),
           },
+          {
+            path: 'edit/:slug',
+            name: 'product',
+            component: () =>
+            import("../views/Staff/product/Edit.vue"),
+          },
+          {
+            path: 'show/:slug',
+            name: 'product',
+            component: () =>
+            import("../views/Staff/product/Show.vue"),
+          },
           // {
           //   path: 'create',
           //   name: 'CreateVisitor',
@@ -140,27 +152,22 @@ const router = new VueRouter({
   routes,
 });
 
-let programmatic = false
-;(['push', 'replace', 'go', 'back', 'forward']).forEach(methodName => {
-  const method = router[methodName]
-  router[methodName] = (...args) => {
-    programmatic = true
-    method.apply(router, args)
-  }
-})
+// let programmatic = false
+// ;(['push', 'replace', 'go', 'back', 'forward']).forEach(methodName => {
+//   const method = router[methodName]
+//   router[methodName] = (...args) => {
+//     programmatic = true
+//     method.apply(router, args)
+//   }
+// })
 
-router.beforeEach((to, from, next) => {
-  // name is null for initial load or page reload
-  if (from.name === null || programmatic) {
-    // triggered bu router.push/go/... call
-    // route as usual
-    next()
-  } else {
-    // triggered by user back/forward 
-    // do not route
-    next(false)
-  }
-  programmatic = false // clear flag
-})
+// router.beforeEach((to, from, next) => {
+//   if (from.name === null || programmatic) {
+//     next()
+//   } else {
+//     next(false)
+//   }
+//   programmatic = false 
+// })
 
 export default router;

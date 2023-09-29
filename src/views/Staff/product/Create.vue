@@ -14,6 +14,20 @@
                         </v-breadcrumbs-item>
                     </template>
                 </v-breadcrumbs>
+                <v-snackbar v-model="snackbar.visible" :color="snackbar.color" :multi-line="snackbar.mode === 'multi-line'" :timeout="snackbar.timeout" :top="snackbar.position === 'top'">
+                    <v-layout align-center pr-4>
+                        <v-icon class="pr-3" dark large>{{ snackbar.icon }}</v-icon>
+                        <v-layout column>
+                            <div>
+                            <strong>{{ snackbar.title }}</strong>
+                            </div>
+                            <div>{{ snackbar.text }}</div>
+                        </v-layout>
+                    </v-layout>
+                    <v-btn v-if="snackbar.timeout === 0" icon @click="snackbar.visible = false">
+                        <v-icon>clear</v-icon>
+                    </v-btn>
+                </v-snackbar>
             </v-col>
             <v-col cols="12">
                 <v-card outlined class="rounded-l ma-0 pa-0">
@@ -90,7 +104,7 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                                     </button>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                     <div style="padding: 40px; text-align:center; border: dashed 2px #dddddd; cursor: pointer; width:100%" @click="openModal()">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-image"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
                                     </div>
@@ -125,6 +139,66 @@
                         </v-row>
                     </v-card-actions>
                 </v-card>
+                <v-dialog
+                    v-model="dialog"
+                    max-width="600px"
+                    persistent
+                >
+                    <v-card style="overflow: hidden;">
+                        <v-card-title class="p-3"> 
+                            Gambar Produk                       
+                            <v-spacer></v-spacer>
+                            <v-btn
+                                class="mx-2"
+                                fab
+                                x-small
+                                color="#e83e8c;"
+                                @click="dialog = false"
+                            >
+                                <v-icon dark>
+                                    mdi-close
+                                </v-icon>
+                            </v-btn>
+                        </v-card-title>
+                        <v-card-text class="mb-0">
+                            <v-container>
+                                <v-row>
+                                    <v-col cols="12">
+                                        <div v-if="image" style="width: auto; height:500px; border: 1px solid gray; display: inline-block;">
+                                            <vue-cropper
+                                                ref='cropper'
+                                                :guides="true"
+                                                :view-mode="2"
+                                                drag-mode="crop"
+                                                :auto-crop-area="0.5"
+                                                :min-container-width="200"
+                                                :min-container-height="180"
+                                                :background="true"
+                                                :rotatable="true"
+                                                :src="image"
+                                                :img-style="{ 'width': 'auto', 'height': '500px' }">
+                                            </vue-cropper>
+                                        </div>
+
+                                        <div v-else>
+                                            <input type="file" name="image" id="image" @change="fileChange" class="form-control" accept="image/*">
+                                        </div>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+                        </v-card-text>
+                        <v-card-actions class="text-center p-3 mt-0">
+                            <v-row justify="center">
+                                <v-col cols="6" xs="6" sm="3" md="3">
+                                    <v-btn block class="rounded-l p-3" @click="[dialog = false]">Cancel</v-btn>
+                                </v-col>
+                                <v-col cols="6" xs="6" sm="3" md="3">
+                                    <v-btn block class="rounded-l text-white p-3" color="primary" @click="applyCropped()">Save</v-btn>
+                                </v-col>
+                            </v-row>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
             </v-col>
         </v-row>
     </v-container>
@@ -133,9 +207,12 @@
 import {product} from "@/backend-api/product"
 import {category} from "@/backend-api/category"
 import { Money } from 'v-money'
+import VueCropper from 'vue-cropperjs'
+import 'cropperjs/dist/cropper.css'
+
 export default {
     components: {
-        Money
+        Money, VueCropper
     },
     data() {
         return {
@@ -177,13 +254,14 @@ export default {
 				thousands: ',',
 				prefix: '',
 				suffix: '',
-				precision: 2,
+				precision: 0,
 				masked: false
 			},
             image: '',
             images: [],
             raw_images: '',
-            description: ''
+            description: '',
+            dialog: false
         }
     },
     async mounted(){
@@ -212,7 +290,7 @@ export default {
             }
         },
         openModal(){
-
+            this.dialog = true
         },
         hapusRawImage(){
 
@@ -220,6 +298,91 @@ export default {
         hapus(key) {
             this.images.splice(key, 1)
         },
+        applyCropped(){
+            this.images.push(this.$refs.cropper.getCroppedCanvas().toDataURL())
+            this.image = ''
+            this.dialog = false
+        },
+        fileChange(e) {
+            let file = e.target.files[0]
+            this.image = ''
+            if (!file.type.includes('image/')) {
+                swal("Error", "Please select an image file!", "error");
+                return
+            }
+            if (file.size > 10000000) {
+                swal("Failed", "File image maximum 10 MB!", "error");
+                return
+            }
+            if (typeof FileReader === 'function') {
+                const reader = new FileReader()
+                reader.onload = (event) => {
+                    this.image = event.target.result
+                }
+                reader.readAsDataURL(file)
+            } else {
+                swal("Error", "Sorry, FileReader API not supported", "error");
+            }
+        },
+        async submit(){
+            this.$store.dispatch('setOverlay', true)
+            
+            if (this.category_id == '' || this.category_id == null || this.name == '' || this.name == null || this.quantity == 0 || this.price == 0 || this.images.length == 0 || this.description == '' || this.description == null) {
+                this.$store.dispatch('setOverlay', false)
+                this.snackbar = {
+                    color: "warning",
+                    icon: "mdi-alert-circle",
+                    mode: "multi-line",
+                    position: "top",
+                    timeout: 7500,
+                    title: "Warning",
+                    text: "Please fill *indicates required field",
+                    visible: true
+                };
+                return false
+            }
+
+            var reqBody = {
+                'name': this.name ? this.name : '',
+                'description': this.description ? this.description : '',
+                'category_id': this.category_id ? this.category_id : '',
+                'images': this.images,
+                'price': this.price ? this.price : '',
+                'quantity': this.quantity ? this.quantity : ''
+            }
+
+            const respData = await product.storeProduct('', reqBody, false, false, false)
+
+            if (respData.status === 200){
+                this.snackbar = {
+                    color: "success",
+                    icon: "mdi-alert-circle",
+                    mode: "multi-line",
+                    position: "top",
+                    timeout: 7500,
+                    title: "Success",
+                    text: respData.data,
+                    visible: true
+                };
+                this.clear()
+                this.$store.dispatch('setOverlay', false)
+                this.$router.push('/staff/product');                
+            } else {
+                this.$store.dispatch('setOverlay', false)
+                this.snackbar = {
+                    color: "error",
+                    icon: "mdi-alert-circle",
+                    mode: "multi-line",
+                    position: "top",
+                    timeout: 7500,
+                    title: "Error",
+                    text: respData.data,
+                    visible: true
+                };
+                return false
+            }
+
+        }
     }
 }
 </script>

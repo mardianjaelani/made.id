@@ -37,6 +37,14 @@ export const product = (() =>{
         return await backendApi.fetchCore(url, reqBody, false, false, false)
     })
 
-    return {fetchProduct, searchProduct, storeProduct, updateProduct};
+    const showProduct = ( async (subPath, reqBody) => {
+        var url = '/api/product/show'
+        if(subPath != null || subPath != ""){
+            url = url + subPath;
+        }
+        return await backendApi.fetchCore(url, reqBody, false, false, false)
+    })
+
+    return {fetchProduct, searchProduct, storeProduct, updateProduct, showProduct};
 
 })()

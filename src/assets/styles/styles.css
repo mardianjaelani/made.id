@@ -399,3 +399,7 @@ label {
   text-align: left;
   float: left;
 }
+
+.w-30{
+  width: 30% !important;
+}
