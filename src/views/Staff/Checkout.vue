@@ -127,23 +127,23 @@
                                                 <v-list dense class="mt-0 pt-0">
                                                     <v-list-item-group v-for="(item, i) in carts"
                                                         :key="i">
-                                                        <v-list-item>
+                                                        <v-list-item class="pl-0 pr-0">
                                                             <v-list-item-content>
                                                                 <div class="d-flex w-100">
-                                                                    <div class="w-25">
+                                                                    <div class="w-20">
                                                                         <v-img
                                                                         class="text-center mx-auto border-12"
                                                                         :src="item.thumbnail"
-                                                                        max-width="80"
+                                                                        max-width="60"
                                                                         height="auto"
                                                                         ></v-img>
                                                                     </div>
-                                                                    <div class="w-30">
+                                                                    <div class="w-25">
                                                                         <p class="mt-1">
                                                                         {{ item.name }}
                                                                         </p>
                                                                     </div>
-                                                                    <div class="w-30 text-center">
+                                                                    <div class="w-20 text-center">
                                                                         <div class="input-group spinner number">
                                                                             <button class="btn error v-btn p-1" type="button">
                                                                                 <v-icon small color="white">mdi-minus</v-icon>
@@ -154,8 +154,13 @@
                                                                             </button>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="w-15 text-right">
-                                                                        <v-icon color="red" @click="deleteDetail(item, i)" class="mt-1">
+                                                                    <div class="w-25 text-right">
+                                                                        <p class="mt-1 text-right">
+                                                                        {{ item.price_string }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="w-10 text-right">
+                                                                        <v-icon color="red" @click="deleteDetail(item, i)" class="">
                                                                             mdi-delete
                                                                         </v-icon>
                                                                     </div>
